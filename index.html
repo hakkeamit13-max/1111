@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jyoti's Birthday</title>
+    <style>
+        /* Body and card styling */
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Hidden by default until countdown finishes */
+        .birthdayCard {
+            
+            display: none; /* Hide by default */
+        }
+
+        .birthdayCard.show {
+            display: block; /* Show after countdown */
+        }
+
+        .birthdayCard:hover {
+            transform: rotateY(180deg);
+        }
+
+      
+        .cardFront {
+            background-color: #ffe6f0;
+        }
+
+      
+       
+
+        .time-box {
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Countdown Timer Section -->
+    <div  class="container"  id="countdown">
+        <h2 style="color: aqua; font-size: 45px;">Countdown</h2>
+        <div class="time-box">
+            
+            <span id="days" style="font-size: 34px;"></span> <h3>Days</h3>
+      
+        </div>
+        <div class="time-box">
+            <span id="hours" style="font-size: 34px;"></span>
+            <h3>Hours</h3>
+           
+        </div>
+        <div class="time-box">
+            <span id="minutes" style="font-size: 34px;"></span>
+           
+            <h3>Minutes</h3>
+        </div>
+        <div class="time-box">
+            <span id="seconds" style="font-size: 34px;"></span>
+                      <h3>Seconds</h3>
+        </div>
+    </div>
+
+    <!-- Birthday Card Section (hidden by default) -->
+    <div class="body">
+        <div class="birthdayCard" onmouseover="confetti()">
+            <div class="cardFront">
+                <img src="https://github.com/DzarelDeveloper/Img/blob/main/ballon.png?raw=true" class="balloons" alt="balloons" />
+                <img src="https://github.com/DzarelDeveloper/Img/blob/main/hat.png?raw=true" alt="bdHat" class="bdHat" />
+                <img src="https://i.postimg.cc/Wpmgcqxr/R.png" alt="cake" class="cake" />
+            <h1 class="birthday-girl" style="color: #ff69b4; text-align: center; margin: 20vh auto; font-family: 'Courier New', monospace; font-weight: bold;">BIRTHDAY GIRL</h1>
+            <h2 class="happy" style="color: #fdda17;">Happy Birthday to Jyoti🎊 !!</h2>
+            </div>
+            <div class="cardInside">
+                <h3 class="back">HAPPY 17th Birthday!</h3> <p>2nd December</p> <p>Happy Birthday, Jyoti! 🎉🎂 "Happy Birthday! I can't think of a better way to start your special day than seeing you first thing in the morning. I’ll be waiting for you at Mankhurd Railway Station on Today
+                     at 8:00 AM. 🌄⛰️</p> <p> 🏞️🌟</p> <p>Enjoy your special day, filled with joy, peace, and all the beauty of the hills! and once again "Many Many Happiest returns of the day" 🎉🎂</p>
+<p style="text-align: center;"><strong>BIRTHDAY GIRL</strong></p>
+</div>
+    <audio id="birthdayAudio" autoplay loop></audio>
+        <source src="your-song-file.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    </div>
+    
+
+    <!-- Confetti Script -->
+    <script src='https://cdn.jsdelivr.net/npm/canvas-confetti@1/dist/confetti.browser.min.js'></script>
+    <script>
+        // Confetti from both sides
+        function confettiSide() {
+            var end = Date.now() + 3 * 1000; // Show confetti for 10 seconds
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Countdown Timer Script
+        const targetDate = new Date("30 November , 2025 11:31:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeRemaining = targetDate - now;
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").style.display = "none";
+                document.querySelector(".birthdayCard").classList.add("show");
+                confettiSide(); // Start confetti from both sides for 10 seconds
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
